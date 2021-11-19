@@ -2,7 +2,6 @@ import React from "react";
 
 export const FormContext = React.createContext();
 
-// This is what the object that contains all the user input looks like.
 const initialState = {
   name: "",
   company: "",
