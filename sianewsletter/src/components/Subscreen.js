@@ -4,7 +4,7 @@ import Input from "./Input";
 import Button from "./Button";
 import FormContext from "./Reducers/FormContext";
 
-const Subscreen = () => {
+const Subscreen = (props) => {
   const {
     state: { name, company, email, checkbox },
     receiveFormInfo,
@@ -12,8 +12,11 @@ const Subscreen = () => {
 
   const [formData, setFormData] = useState({ name, company, email, checkbox });
 
-  const noRefresh = (e) => {
-    e.preventDefault();
+  const noRefresh = () => {
+    // e.preventDefault();
+    if (document.getElementById("name").length === 0) {
+      window.alert("Name is empty");
+    }
     // history.push("/confirmation");
     console.log("You clicked submit.");
   };
@@ -28,10 +31,11 @@ const Subscreen = () => {
           type="text"
           name="name"
           placeholder="Name"
-          value={formData.name}
+          value={props.inputValue}
           onChange={(event) => {
             setFormData({ ...formData, name: event.target.value });
           }}
+          id="name"
         />
         <label htmlFor="Company">Company:</label>
         <Input
@@ -39,10 +43,10 @@ const Subscreen = () => {
           type="text"
           name="company"
           placeholder="Company"
-          value={formData.company}
-          onChange={(event) => {
-            setFormData({ ...formData, company: event.target.value });
-          }}
+          // value={props.inputValue}
+          // onChange={(event) => {
+          //   setFormData({ ...formData, company: props.value });
+          // }}
         />
         <label htmlFor="Email">Email address:</label>
         <Input
@@ -50,10 +54,10 @@ const Subscreen = () => {
           type="email"
           name="email"
           placeholder="Email"
-          value={formData.email}
-          onChange={(event) => {
-            setFormData({ ...formData, email: event.target.value });
-          }}
+          // value={props.inputValue}
+          // onChange={(event) => {
+          //   setFormData({ ...formData, email: props.value });
+          // }}
         />
         <div className="checkbox">
           <input
@@ -72,7 +76,7 @@ const Subscreen = () => {
                   ...formData,
                 });
                 // handleSubmit(e);
-                // noRefresh();
+                noRefresh();
               }}
             >
               Submit
